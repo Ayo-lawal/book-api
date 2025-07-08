@@ -23,73 +23,156 @@
 
 ## Description
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+# Books API - NestJS Learning Project
 
-## Project setup
+A simple REST API for managing books built with NestJS framework. This project demonstrates basic CRUD operations, dependency injection, and RESTful API design patterns.
 
-```bash
-$ npm install
+## 🚀 Features
+
+- **Create** new books
+- **Read** all books or find specific books by ID
+- **Update** existing books (partial updates supported)
+- **Delete** books by ID
+- In-memory data storage
+- Type-safe with TypeScript
+- RESTful endpoint design
+
+## 📋 API Endpoints
+
+| Method | Endpoint | Description | Body |
+|--------|----------|-------------|------|
+| `GET` | `/books` | Get all books | - |
+| `GET` | `/books/:id` | Get book by ID | - |
+| `POST` | `/books` | Create new book | `{ title, author, publishedYear }` |
+| `PUT` | `/books/:id` | Update book | `{ title?, author?, publishedYear? }` |
+| `DELETE` | `/books/:id` | Delete book | - |
+
+## 🏗️ Project Structure
+
+```
+src/
+├── app.controller.ts    # Main books controller (CRUD endpoints)
+├── app.service.ts       # Business logic service
+├── app.module.ts        # Application module
+├── FakeDatabase.ts      # In-memory data storage
+└── main.ts             # Application entry point
 ```
 
-## Compile and run the project
+## 📚 Book Model
 
-```bash
-# development
-$ npm run start
-
-# watch mode
-$ npm run start:dev
-
-# production mode
-$ npm run start:prod
+```typescript
+interface Book {
+  id: number;
+  title: string;
+  author: string;
+  publishedYear: number;
+}
 ```
 
-## Run tests
+## 🛠️ Installation & Setup
 
+1. **Clone the repository**
+   ```bash
+   git clone <your-repo-url>
+   cd book-api
+   ```
+
+2. **Install dependencies**
+   ```bash
+   npm install
+   ```
+
+3. **Run the application**
+   ```bash
+   # Development mode
+   npm run start:dev
+   
+   # Production mode
+   npm run start:prod
+   ```
+
+4. **Access the API**
+   - Base URL: `http://localhost:3000`
+   - Books endpoint: `http://localhost:3000/books`
+
+## 🧪 Example Usage
+
+### Create a new book
 ```bash
-# unit tests
-$ npm run test
-
-# e2e tests
-$ npm run test:e2e
-
-# test coverage
-$ npm run test:cov
+curl -X POST http://localhost:3000/books \
+  -H "Content-Type: application/json" \
+  -d '{
+    "title": "The Great Gatsby",
+    "author": "F. Scott Fitzgerald",
+    "publishedYear": 1925
+  }'
 ```
 
-## Deployment
-
-When you're ready to deploy your NestJS application to production, there are some key steps you can take to ensure it runs as efficiently as possible. Check out the [deployment documentation](https://docs.nestjs.com/deployment) for more information.
-
-If you are looking for a cloud-based platform to deploy your NestJS application, check out [Mau](https://mau.nestjs.com), our official platform for deploying NestJS applications on AWS. Mau makes deployment straightforward and fast, requiring just a few simple steps:
-
+### Get all books
 ```bash
-$ npm install -g @nestjs/mau
-$ mau deploy
+curl http://localhost:3000/books
 ```
 
-With Mau, you can deploy your application in just a few clicks, allowing you to focus on building features rather than managing infrastructure.
+### Get book by ID
+```bash
+curl http://localhost:3000/books/1
+```
 
-## Resources
+### Update a book
+```bash
+curl -X PUT http://localhost:3000/books/1 \
+  -H "Content-Type: application/json" \
+  -d '{
+    "title": "Updated Title"
+  }'
+```
 
-Check out a few resources that may come in handy when working with NestJS:
+### Delete a book
+```bash
+curl -X DELETE http://localhost:3000/books/1
+```
 
-- Visit the [NestJS Documentation](https://docs.nestjs.com) to learn more about the framework.
-- For questions and support, please visit our [Discord channel](https://discord.gg/G7Qnnhy).
-- To dive deeper and get more hands-on experience, check out our official video [courses](https://courses.nestjs.com/).
-- Deploy your application to AWS with the help of [NestJS Mau](https://mau.nestjs.com) in just a few clicks.
-- Visualize your application graph and interact with the NestJS application in real-time using [NestJS Devtools](https://devtools.nestjs.com).
-- Need help with your project (part-time to full-time)? Check out our official [enterprise support](https://enterprise.nestjs.com).
-- To stay in the loop and get updates, follow us on [X](https://x.com/nestframework) and [LinkedIn](https://linkedin.com/company/nestjs).
-- Looking for a job, or have a job to offer? Check out our official [Jobs board](https://jobs.nestjs.com).
+## 🎯 Learning Objectives
 
-## Support
+This project covers the following NestJS concepts:
 
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
+- **Controllers**: Handling HTTP requests and responses
+- **Services**: Business logic separation and dependency injection
+- **Modules**: Application structure and organization
+- **Decorators**: `@Controller`, `@Get`, `@Post`, `@Put`, `@Delete`, `@Param`, `@Body`
+- **DTOs**: Data transfer objects and validation
+- **TypeScript**: Strong typing and interfaces
 
+## 🔧 Technologies Used
+
+- **NestJS** - Progressive Node.js framework
+- **TypeScript** - Typed superset of JavaScript
+- **Node.js** - Runtime environment
+- **Express** - HTTP server framework (under the hood)
+
+## 📝 Notes
+
+- This project uses in-memory storage, so data will be lost when the server restarts
+- For production applications, you would typically use a real database (PostgreSQL, MongoDB, etc.)
+- Consider adding validation decorators (`class-validator`) for production use
+- Authentication and authorization would be needed for real-world applications
+
+## 🚧 Future Enhancements
+
+- [ ] Add database integration (TypeORM/Mongoose)
+- [ ] Implement data validation with DTOs
+- [ ] Add authentication & authorization
+- [ ] Add unit tests
+- [ ] Add API documentation with Swagger
+- [ ] Add pagination for book listings
+- [ ] Add search and filtering capabilities
+
+---
+
+**Happy Learning!** 🎓 This project is perfect for understanding NestJS fundamentals and REST API development patterns.
 ## Stay in touch
 
-- Author - [Kamil Myśliwiec](https://twitter.com/kammysliwiec)
+- Author - [Ayo Lawal](https://x.com/Ayo__Lawal)
 - Website - [https://nestjs.com](https://nestjs.com/)
 - Twitter - [@nestframework](https://twitter.com/nestframework)
 
